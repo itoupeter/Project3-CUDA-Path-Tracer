@@ -28,3 +28,10 @@ _observation_ Images rendered with deeper trace level appear darker, which is du
 Trace Depth 2 | Trace Depth 8
 --- | ---
 <img src="http://i.imgur.com/rdbwMci.jpg" width="400"> | <img src="http://i.imgur.com/rdbwMci.jpg" width="400">
+
+
+* Specular Reflection
+
+Trace Depth 2 | Trace Depth 8
+--- | ---
+<img src="img/mirror_depth2_1000spp.png" width="400"> | <img src="img/mirror_depth8_1000spp.png" width="400">

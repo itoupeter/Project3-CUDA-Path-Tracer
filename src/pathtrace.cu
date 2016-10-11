@@ -206,7 +206,7 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
 		// 		iter, num_paths, dev_intersections, dev_paths, dev_materials);
 
 		// working
-		shadeDiffuseMaterial<<<numblocksPathSegmentTracing, blockSize1d>>>(
+		shadeAllMaterial<<<numblocksPathSegmentTracing, blockSize1d>>>(
 				iter, num_paths, dev_intersections, dev_paths, dev_materials);
 
 		gatherAndTerminate<<<numblocksPathSegmentTracing, blockSize1d>>>(
@@ -341,7 +341,7 @@ __global__ void computeIntersections(int depth, int num_paths,
 	}
 }
 
-__global__ void shadeDiffuseMaterial(int iter, int num_paths,
+__global__ void shadeAllMaterial(int iter, int num_paths,
 		ShadeableIntersection *shadeableIntersections,
 		PathSegment *pathSegments, Material *materials) {
 
@@ -360,11 +360,12 @@ __global__ void shadeDiffuseMaterial(int iter, int num_paths,
 		const Material &material = materials[intersection.materialId];
 
 		// If the material indicates that the object was a light, "light" the ray
-		if (material.emittance > 0.0f) {
+		if (material.emittance > 0.f) {
 			pathSegments[idx].remainingBounces = 0;
     		pathSegments[idx].color *= material.color * material.emittance;
 		} else {
-			// Otherwise, do lighting computation
+			// specular reflection
+			// lambert reflection
 			pathSegments[idx].color *= material.color;
 		}
     } else {
@@ -374,7 +375,7 @@ __global__ void shadeDiffuseMaterial(int iter, int num_paths,
 		// This can be useful for post-processing and image compositing.
 		pathSegments[idx].color = glm::vec3(0.0f);
     }
-	
+
 	float colorRGB = pathSegments[idx].color.x + pathSegments[idx].color.y
 			+ pathSegments[idx].color.z;
 

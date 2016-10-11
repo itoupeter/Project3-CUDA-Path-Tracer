@@ -79,7 +79,16 @@ void scatterRay(PathSegment &path, const ShadeableIntersection &intersection,
 
 	newRay.origin = ray.origin + ray.direction * intersection.t
 			+ intersection.surfaceNormal * 1e-3f;
-	newRay.direction = calculateRandomDirectionInHemisphere(
-			intersection.surfaceNormal, rng);
+
+	if (material.hasReflective) {
+		// specular reflection
+		newRay.direction = glm::reflect(
+				ray.direction, intersection.surfaceNormal);
+	} else {
+		// lambert reflection
+		newRay.direction = calculateRandomDirectionInHemisphere(
+				intersection.surfaceNormal, rng);
+	}
+
 	path.ray = newRay;
 }

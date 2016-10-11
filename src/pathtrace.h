@@ -10,7 +10,7 @@ void pathtrace(uchar4 *pbo, int frame, int iteration);
 __global__ void gatherAndTerminate(int nPaths, glm::vec3 * image,
 		PathSegment *iterationPaths, ShadeableIntersection *intersctions);
 
-__global__ void shadeDiffuseMaterial(int iter, int num_paths,
+__global__ void shadeAllMaterial(int iter, int num_paths,
 		ShadeableIntersection *shadeableIntersections,
 		PathSegment *pathSegments, Material *materials);
 
