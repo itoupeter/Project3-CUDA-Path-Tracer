@@ -126,9 +126,9 @@ TRANS       -3 4 -1
 ROTAT       0 0 0
 SCALE       3 3 3
 
-// Transparent Sphere
+// Transparent cube
 OBJECT 7
-sphere
+cube
 material 5
 TRANS       3 4 0
 ROTAT       0 0 0
