@@ -378,7 +378,7 @@ __global__ void shadeAllMaterial(int iter, int num_paths,
 			+ pathSegments[idx].color.z;
 
 	if (colorRGB <= 0.f) {
-		 pathSegments[idx].remainingBounces = 0;
+		pathSegments[idx].remainingBounces = 0;
 	}
 }
 
@@ -396,9 +396,10 @@ __global__ void gatherAndTerminate(int num_paths, glm::vec3 * image,
 	ShadeableIntersection &intersection = dev_intersections[idx];
 
 	path.remainingBounces -= 1;
-
-	if (path.remainingBounces <= 0 || intersection.t <= 1e-4f) {
+	if (path.remainingBounces <= 0) {
 		image[path.pixelIndex] += path.color;
+	}
+	if (intersection.t <= 1e-4f) {
 		path.remainingBounces = 0;
 	}
 }

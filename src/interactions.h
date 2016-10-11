@@ -83,17 +83,21 @@ void scatterRay(PathSegment &path, const ShadeableIntersection &intersection,
 				ray.direction, intersection.surfaceNormal));
 	} else if(material.hasRefractive > 0.f) {
 		// refraction
-		if (glm::dot(intersection.surfaceNormal, ray.direction) < 0) {
+		float cosine = glm::dot(intersection.surfaceNormal, ray.direction);
+
+		if (glm::abs(cosine) < 1e-2f) {
+			newRay.direction = ray.direction;
+		} else if (cosine < 0.f) {
 			newRay.direction = glm::refract(ray.direction,
-					intersection.surfaceNormal,	1.0f / material.indexOfRefraction);
+					intersection.surfaceNormal,	1.f / material.indexOfRefraction);
 		} else {
 			newRay.direction = glm::refract(ray.direction,
-					intersection.surfaceNormal,	material.indexOfRefraction);
+					-intersection.surfaceNormal, material.indexOfRefraction);
 		}
-
-		if (glm::length(newRay.direction) < 1e-4f){
+		// total reflection
+		if (glm::length(newRay.direction) < 1e-3f){
 			newRay.direction = glm::reflect(ray.direction,
-					intersection.surfaceNormal);
+					-intersection.surfaceNormal);
 		}
 	} else {
 		// lambert reflection

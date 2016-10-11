@@ -26,7 +26,7 @@ _observation_ Images rendered with deeper trace level appear darker, which is du
 
 * Refraction
 
-Refraction 1, SPP 1000 | Refraction 2, SPP 1000
+Refraction 1, SPP 1000 | Refraction 2, SPP 5000
 --- | ---
 <img src="img/refraction_depth8_1000spp.png" width="400"> | <img src="img/refraction2_depth8_1000spp.png" width="400">
 _observation_ Since large amount of paths are traced, caustics produced by refraction are free.
