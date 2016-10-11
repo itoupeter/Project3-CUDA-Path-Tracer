@@ -272,9 +272,7 @@ __global__ void generateRayFromCamera(Camera cam, int iter, int traceDepth,
 
 		segment.ray.direction = glm::normalize(cam.view
 			- cam.right * cam.pixelLength.x * ((float)x - (float)cam.resolution.x * .5f + shiftX)
-			- cam.up * cam.pixelLength.y * ((float)y - (float)cam.resolution.y * .5f + shiftY)
-			);
-
+			- cam.up * cam.pixelLength.y * ((float)y - (float)cam.resolution.y * .5f + shiftY));
 		segment.pixelIndex = index;
 		segment.remainingBounces = traceDepth;
 	}

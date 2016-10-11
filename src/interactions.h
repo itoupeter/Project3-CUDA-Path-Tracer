@@ -74,21 +74,34 @@ void scatterRay(PathSegment &path, const ShadeableIntersection &intersection,
     // A basic implementation of pure-diffuse shading will just call the
     // calculateRandomDirectionInHemisphere defined above.
 
-	Ray ray = path.ray;
+	const Ray &ray = path.ray;
 	Ray newRay = path.ray;
 
-	newRay.origin = ray.origin + ray.direction * intersection.t
-			+ intersection.surfaceNormal * 1e-3f;
-
-	if (material.hasReflective) {
+	if (material.hasReflective > 0.f) {
 		// specular reflection
-		newRay.direction = glm::reflect(
-				ray.direction, intersection.surfaceNormal);
+		newRay.direction = glm::normalize(glm::reflect(
+				ray.direction, intersection.surfaceNormal));
+	} else if(material.hasRefractive > 0.f) {
+		// refraction
+		if (glm::dot(intersection.surfaceNormal, ray.direction) < 0) {
+			newRay.direction = glm::refract(ray.direction,
+					intersection.surfaceNormal,	1.0f / material.indexOfRefraction);
+		} else {
+			newRay.direction = glm::refract(ray.direction,
+					intersection.surfaceNormal,	material.indexOfRefraction);
+		}
+
+		if (glm::length(newRay.direction) < 1e-4f){
+			newRay.direction = glm::reflect(ray.direction,
+					intersection.surfaceNormal);
+		}
 	} else {
 		// lambert reflection
 		newRay.direction = calculateRandomDirectionInHemisphere(
 				intersection.surfaceNormal, rng);
 	}
 
+	newRay.origin = ray.origin + ray.direction * intersection.t
+			+ newRay.direction * 1e-3f;
 	path.ray = newRay;
 }
