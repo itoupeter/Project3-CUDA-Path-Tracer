@@ -256,25 +256,41 @@ __global__ void generateRayFromCamera(Camera cam, int iter, int traceDepth,
 	int x = (blockIdx.x * blockDim.x) + threadIdx.x;
 	int y = (blockIdx.y * blockDim.y) + threadIdx.y;
 
-	if (x < cam.resolution.x && y < cam.resolution.y) {
-		int index = x + (y * cam.resolution.x);
-		PathSegment & segment = pathSegments[index];
+	if (x >= cam.resolution.x || y >= cam.resolution.y) {
+		return;
+	}
 
+	int index = x + (y * cam.resolution.x);
+	float lensRadius = cam.lensRadius;
+	float focalDistance = cam.focalDistance;
+	thrust::default_random_engine rng = makeSeededRandomEngine(
+			iter, index, traceDepth);
+	thrust::uniform_real_distribution<float> u01(0, 1);
+	PathSegment &segment = pathSegments[index];
+
+	// TODO: implement antialiasing by jittering the ray
+	float shiftX = u01(rng) - .5f;
+	float shiftY = u01(rng) - .5f;
+
+	segment.ray.direction = glm::normalize(cam.view
+		- cam.right * cam.pixelLength.x * ((float)x - (float)cam.resolution.x * .5f + shiftX)
+		- cam.up * cam.pixelLength.y * ((float)y - (float)cam.resolution.y * .5f + shiftY));
+	segment.color = glm::vec3(1.0f, 1.0f, 1.0f);
+	segment.pixelIndex = index;
+	segment.remainingBounces = traceDepth;
+
+	// depth of field
+	if (lensRadius == 0.f) {
 		segment.ray.origin = cam.position;
-    	segment.color = glm::vec3(1.0f, 1.0f, 1.0f);
+	} else {
+		float r = sqrtf(u01(rng)) * lensRadius;
+		float theta = u01(rng) * PI;
+		float ft = fabs(focalDistance / glm::dot(segment.ray.direction, cam.view));
+		glm::vec3 pointFocus = cam.position + segment.ray.direction * ft;
 
-		// TODO: implement antialiasing by jittering the ray
-		thrust::default_random_engine rng = makeSeededRandomEngine(iter,
-				index, traceDepth);
-		thrust::uniform_real_distribution<float> u01(0, 1);
-		float shiftX = u01(rng) - .5f;
-		float shiftY = u01(rng) - .5f;
-
-		segment.ray.direction = glm::normalize(cam.view
-			- cam.right * cam.pixelLength.x * ((float)x - (float)cam.resolution.x * .5f + shiftX)
-			- cam.up * cam.pixelLength.y * ((float)y - (float)cam.resolution.y * .5f + shiftY));
-		segment.pixelIndex = index;
-		segment.remainingBounces = traceDepth;
+		segment.ray.origin = cam.position + r * cosf(theta) * cam.right
+				+ r * sinf(theta) * cam.up;
+		segment.ray.direction = glm::normalize(pointFocus - segment.ray.origin);
 	}
 }
 

@@ -12,7 +12,7 @@ CUDA Path Tracer
   * [x] Refraction
   * [x] Specular Reflection
   * [ ] Glossy Reflection
-* [ ] Depth of Field
+* [x] Depth of Field
 * [x] Stratified Antialiasing
 * [ ] Performance Analysis
 
@@ -36,3 +36,16 @@ _observation_ Since large amount of paths are traced, caustics produced by refra
 Trace Depth 2, SPP 1000 | Trace Depth 8, SPP 1000
 --- | ---
 <img src="img/mirror_depth2_1000spp.png" width="400"> | <img src="img/mirror_depth8_1000spp.png" width="400">
+
+* Glossy Reflection
+
+Glossy Reflection | Glossy Reflection
+--- | ---
+<img src="http://i.imgur.com/kcDsCaY.jpg" width="400"> | <img src="http://i.imgur.com/kcDsCaY.jpg" width="400">
+
+
+### Depth of Field
+
+Depth of Field, far focal | Depth of Field, near focal
+--- | ---
+<img src="img/DoF_depth8_3000spp.png" width="400"> | <img src="img/DoF2_depth8_3000spp.png" width="400">
