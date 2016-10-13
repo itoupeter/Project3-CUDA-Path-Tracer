@@ -7,13 +7,14 @@ CUDA Path Tracer
 * Tested on: Windows 10, i7-6700HQ @ 2.6GHz 2.6GHz 8GB, GTX 960M (Personal Laptop)
 
 ### Feature
-* [ ] Ray Scattering
+* [x] Ray Scattering
   * [x] Diffuse
   * [x] Refraction
   * [x] Specular Reflection
-  * [ ] Glossy Reflection
+  * [x] Glossy Reflection
 * [x] Depth of Field
 * [x] Stratified Antialiasing
+* [ ] Motion Blur
 * [ ] Performance Analysis
 
 ### Ray Scattering
