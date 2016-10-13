@@ -49,3 +49,4 @@ _obervation_ For different types of material, glossiness can be adjusted by tuni
 Depth of Field, far focal | Depth of Field, near focal
 --- | ---
 <img src="img/DoF_depth8_3000spp.png" width="400"> | <img src="img/DoF2_depth8_3000spp.png" width="400">
+_obervation_ There are 2 parameters we can play around with in terms of depth of field, lens radius and focal distance. Larger lens radius produces stronger DoF effect. Focal distance affects the distance the virtual camera is focusing on.
