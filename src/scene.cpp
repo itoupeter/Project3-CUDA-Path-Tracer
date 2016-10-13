@@ -116,6 +116,7 @@ int Scene::loadCamera() {
 
     string line;
     utilityCore::safeGetline(fp_in, line);
+	camera.isAA = false;
     while (!line.empty() && fp_in.good()) {
         vector<string> tokens = utilityCore::tokenizeString(line);
         if (strcmp(tokens[0].c_str(), "EYE") == 0) {
@@ -128,7 +129,9 @@ int Scene::loadCamera() {
 			camera.lensRadius = atof(tokens[1].c_str());
 		} else if (strcmp(tokens[0].c_str(), "FOCALD") == 0) {
 			camera.focalDistance = atof(tokens[1].c_str());
-        }
+        } else if (strcmp(tokens[0].c_str(), "AA") == 0) {
+			camera.isAA = (tokens[1] == "ON");
+		}
 
         utilityCore::safeGetline(fp_in, line);
     }

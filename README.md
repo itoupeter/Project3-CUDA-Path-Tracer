@@ -40,14 +40,26 @@ Trace Depth 2, SPP 1000 | Trace Depth 8, SPP 1000
 
 * Glossy Reflection
 
-Less glossy floor, SPP 3000 | Glossier floor, SPP 3000
+Less Glossy Floor, SPP 3000 | Glossier Floor, SPP 3000
 --- | ---
 <img src="img/glossy_depth8_3000spp.png" width="400"> | <img src="img/glossy2_depth8_3000spp.png" width="400">
 _obervation_ For different types of material, glossiness can be adjusted by tuning the specular exponent. Larger exponent produces reflection closer to mirror.
 
 ### Depth of Field
 
-Depth of Field, far focal | Depth of Field, near focal
+Depth of Field, Far Focal | Depth of Field, Near Focal
 --- | ---
 <img src="img/DoF_depth8_3000spp.png" width="400"> | <img src="img/DoF2_depth8_3000spp.png" width="400">
 _obervation_ There are 2 parameters we can play around with in terms of depth of field, lens radius and focal distance. Larger lens radius produces stronger DoF effect. Focal distance affects the distance the virtual camera is focusing on.
+
+### Antialiasing
+
+without Antialiasing | With Antialiasing
+--- | ---
+<img src="img/aa3_depth8_2000spp.png" width="400"> | <img src="img/aa4_depth8_2000spp.png" width="400">
+
+### Motion Blur
+
+With Motion Blur | without Motion Blur
+--- | ---
+<img src="http://i.imgur.com/rdbwMci.jpg" width="400"> | <img src="http://i.imgur.com/rdbwMci.jpg" width="400">

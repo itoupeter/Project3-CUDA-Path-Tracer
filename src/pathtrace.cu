@@ -269,8 +269,13 @@ __global__ void generateRayFromCamera(Camera cam, int iter, int traceDepth,
 	PathSegment &segment = pathSegments[index];
 
 	// TODO: implement antialiasing by jittering the ray
-	float shiftX = u01(rng) - .5f;
-	float shiftY = u01(rng) - .5f;
+	float shiftX = 0.f;
+	float shiftY = 0.f;
+
+	if (cam.isAA) {
+		shiftX = u01(rng) - .5f;
+		shiftY = u01(rng) - .5f;
+	}
 
 	segment.ray.direction = glm::normalize(cam.view
 		- cam.right * cam.pixelLength.x * ((float)x - (float)cam.resolution.x * .5f + shiftX)

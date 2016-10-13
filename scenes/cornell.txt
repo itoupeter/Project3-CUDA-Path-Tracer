@@ -72,14 +72,15 @@ EMITTANCE   0
 CAMERA
 RES         800 800
 FOVY        45
-ITERATIONS  5000
+ITERATIONS  2000
 DEPTH       8
 FILE        cornell
-EYE         0.0 5 10.5
+EYE         0 5 5
 LOOKAT      0 5 0
 UP          0 1 0
 LENSR       0
 FOCALD      7
+AA          OFF
 
 // Ceiling light
 OBJECT 0
@@ -92,7 +93,7 @@ SCALE       3 .3 3
 // Floor
 OBJECT 1
 cube
-material 6
+material 1
 TRANS       0 0 0
 ROTAT       0 0 0
 SCALE       10 .01 10
