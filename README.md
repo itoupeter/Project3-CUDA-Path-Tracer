@@ -54,7 +54,7 @@ _obervation_ There are 2 parameters we can play around with in terms of depth of
 
 ### Antialiasing
 
-without Antialiasing | With Antialiasing
+Antialiasing OFF | Antialiasing ON
 --- | ---
 <img src="img/aa3_depth8_2000spp.png" width="400"> | <img src="img/aa4_depth8_2000spp.png" width="400">
 
