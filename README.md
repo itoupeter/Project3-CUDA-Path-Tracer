@@ -39,10 +39,10 @@ Trace Depth 2, SPP 1000 | Trace Depth 8, SPP 1000
 
 * Glossy Reflection
 
-Glossy Reflection | Glossy Reflection
+Less glossy floor, SPP 3000 | Glossier floor, SPP 3000
 --- | ---
-<img src="http://i.imgur.com/kcDsCaY.jpg" width="400"> | <img src="http://i.imgur.com/kcDsCaY.jpg" width="400">
-
+<img src="img/glossy_depth8_3000spp.png" width="400"> | <img src="img/glossy2_depth8_3000spp.png" width="400">
+_obervation_ For different types of material, glossiness can be adjusted by tuning the specular exponent. Larger exponent produces reflection closer to mirror.
 
 ### Depth of Field
 

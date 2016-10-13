@@ -1,6 +1,7 @@
 #pragma once
 
 #include "intersections.h"
+#include <glm/gtx/rotate_vector.hpp>
 
 // CHECKITOUT
 /**
@@ -76,11 +77,22 @@ void scatterRay(PathSegment &path, const ShadeableIntersection &intersection,
 
 	const Ray &ray = path.ray;
 	Ray newRay = path.ray;
+	thrust::uniform_real_distribution<float> u01(0, 1);
 
 	if (material.hasReflective > 0.f) {
 		// specular reflection
-		newRay.direction = glm::normalize(glm::reflect(
-				ray.direction, intersection.surfaceNormal));
+		float theta = acos(pow(u01(rng), 1.f / (material.specular.exponent + 1.f)));
+		float phi = TWO_PI * u01(rng);
+		glm::vec3 mirror = glm::normalize(glm::reflect(ray.direction,
+				intersection.surfaceNormal));
+		glm::vec3 up = {0.f, 0.f, 1.f};
+		glm::vec3 axis = glm::normalize(glm::cross(up, mirror));
+		float angle = acos(glm::dot(up, mirror));
+
+		newRay.direction = glm::vec3(cos(phi) * sin(theta),
+				sin(phi) * sin(theta), cos(theta));
+		newRay.direction = glm::normalize(
+				glm::rotate(newRay.direction, angle, axis));
 	} else if(material.hasRefractive > 0.f) {
 		// refraction
 		float cosine = glm::dot(intersection.surfaceNormal, ray.direction);
