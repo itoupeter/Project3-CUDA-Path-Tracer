@@ -18,7 +18,7 @@ CUDA Path Tracer
 
 ### Overview
 <img src="img/cover_depth8_5000spp.png"><br>
-The image is rendered by a path tracer on GPU, with trace depth 8 and 5000 samples per pixel. Features include diffuse, glossy, specular reflection, refraction, depth of field, and stratified antialiasing. The image is produced by averaging the results of all large amount of iterations. In each iteration, the camera will shoot a ray through each pixel and intersect with the scene objects. Based on the material at the intersection point, each ray will change color and be reflected towards certain direction and continue tracing. As a ray reaches it trace depth, its color will be accumulated to compute the final color.
+The image is rendered by a path tracer on GPU, with trace depth 8 and 5000 samples per pixel. Features include diffuse, glossy, specular reflection, refraction, depth of field, and stratified antialiasing.
 
 ### Ray Scattering
 * Lambert Diffuse
@@ -73,6 +73,9 @@ __Depth__ | __4__ | __5__ | __6__
 Time | 110 ms | 120 ms | 140 ms
 Image | ![](img/depth4.png) | ![](img/depth5.png) | ![](img/depth6.png)
 __Depth__ | __7__ | __8__ | __9__
-Tim3 | 148 ms | 156 ms | 160 ms
+Tim3 | 148 ms | 156 ms | 156 ms
 Image | ![](img/depth7.png) | ![](img/depth8.png) | ![](img/depth9.png)
-_observation_
+
+![](img/time_vs_depth.png)
+
+_Observation_ Apparently, as trace depth increases, image quality becomes better. Interestingly, time spent on 1 iteration increases with decreasing rate, that is probably due to the fact that as a ray traces deeper, it is more likely to hit nothing or terminated, thus need no more calculation.
