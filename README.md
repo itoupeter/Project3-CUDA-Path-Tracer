@@ -14,8 +14,11 @@ CUDA Path Tracer
   * [x] Glossy Reflection
 * [x] Depth of Field
 * [x] Stratified Antialiasing
-* [ ] Motion Blur
 * [ ] Performance Analysis
+
+### Overview
+<img src="img/cover_depth8_5000spp.png" width="400">
+The image is rendered by a path tracer on GPU. Features include diffuse, glossy, specular reflection, refraction, depth of field, and stratified antialiasing.
 
 ### Ray Scattering
 * Lambert Diffuse
@@ -57,9 +60,4 @@ _obervation_ There are 2 parameters we can play around with in terms of depth of
 Antialiasing OFF | Antialiasing ON
 --- | ---
 <img src="img/aa3_depth8_2000spp.png" width="400"> | <img src="img/aa4_depth8_2000spp.png" width="400">
-
-### Motion Blur
-
-With Motion Blur | without Motion Blur
---- | ---
-<img src="http://i.imgur.com/rdbwMci.jpg" width="400"> | <img src="http://i.imgur.com/rdbwMci.jpg" width="400">
+_obersvation_ By jittering the camera ray within the ray's own pixel and performing large number of iterations, the final color of a pixel is computed by averaging all rays going through the pixel, producing antialiased image.
