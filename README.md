@@ -14,7 +14,7 @@ CUDA Path Tracer
   * [x] Glossy Reflection
 * [x] Depth of Field
 * [x] Stratified Antialiasing
-* [ ] Performance Analysis
+* [x] Performance Analysis
 
 ### Overview
 <img src="img/cover_depth8_5000spp.png"><br>
@@ -62,7 +62,7 @@ Antialiasing OFF | Antialiasing ON
 <img src="img/aa3_depth8_2000spp.png" width="400"> | <img src="img/aa4_depth8_2000spp.png" width="400">
 _obersvation_ By jittering the camera ray within the ray's own pixel and performing large number of iterations, the final color of a pixel is computed by averaging all rays going through the pixel, producing antialiased image.
 
-### Performance
+### Performance Analysis
 * Trace Depth
 
 Depth | 1 | 2 | 3
@@ -73,7 +73,7 @@ __Depth__ | __4__ | __5__ | __6__
 Time | 110 ms | 120 ms | 140 ms
 Image | ![](img/depth4.png) | ![](img/depth5.png) | ![](img/depth6.png)
 __Depth__ | __7__ | __8__ | __9__
-Tim3 | 148 ms | 156 ms | 156 ms
+Tim3 | 148 ms | 156 ms | 160 ms
 Image | ![](img/depth7.png) | ![](img/depth8.png) | ![](img/depth9.png)
 
 ![](img/time_vs_depth.png)
