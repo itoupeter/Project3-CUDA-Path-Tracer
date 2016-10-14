@@ -18,7 +18,7 @@ CUDA Path Tracer
 
 ### Overview
 <img src="img/cover_depth8_5000spp.png"><br>
-The image is rendered by a path tracer on GPU, with trace depth 8 and 5000 samples per pixel. Features include diffuse, glossy, specular reflection, refraction, depth of field, and stratified antialiasing.
+The image is rendered by a path tracer on GPU, with trace depth 8 and 5000 samples per pixel. Features include diffuse, glossy, specular reflection, refraction, depth of field, and stratified antialiasing. The image is produced by averaging the results of all large amount of iterations. In each iteration, the camera will shoot a ray through each pixel and intersect with the scene objects. Based on the material at the intersection point, each ray will change color and be reflected towards certain direction and continue tracing. As a ray reaches it trace depth, its color will be accumulated to compute the final color.
 
 ### Ray Scattering
 * Lambert Diffuse
