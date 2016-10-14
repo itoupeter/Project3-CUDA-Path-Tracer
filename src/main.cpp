@@ -1,6 +1,8 @@
 #include "main.h"
 #include "preview.h"
 #include <cstring>
+#include <chrono>
+using namespace std::chrono;
 
 static std::string startTimeString;
 
@@ -22,6 +24,7 @@ glm::vec3 ogLookAt; // for recentering the camera
 Scene *scene;
 RenderState *renderState;
 int iteration;
+int durationPerIteration;
 
 int width;
 int height;
@@ -128,6 +131,9 @@ void runCuda() {
     }
 
     if (iteration < renderState->iterations) {
+		// tic
+		high_resolution_clock::time_point t1 = high_resolution_clock::now();
+
         uchar4 *pbo_dptr = NULL;
         iteration++;
         cudaGLMapBufferObject((void**)&pbo_dptr, pbo);
@@ -138,6 +144,12 @@ void runCuda() {
 
         // unmap buffer object
         cudaGLUnmapBufferObject(pbo);
+
+		// toc
+		cudaDeviceSynchronize();
+		high_resolution_clock::time_point t2 = high_resolution_clock::now();
+		duration<int, std::milli> d = duration_cast<duration<int, std::milli>>(t2 - t1);
+		durationPerIteration = d.count();
     } else {
         saveImage();
         pathtraceFree();

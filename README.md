@@ -18,7 +18,7 @@ CUDA Path Tracer
 
 ### Overview
 <img src="img/cover_depth8_5000spp.png"><br>
-The image is rendered by a path tracer on GPU. Features include diffuse, glossy, specular reflection, refraction, depth of field, and stratified antialiasing.
+The image is rendered by a path tracer on GPU, with trace depth 8 and 5000 samples per pixel. Features include diffuse, glossy, specular reflection, refraction, depth of field, and stratified antialiasing. The image is produced by averaging the results of all large amount of iterations. In each iteration, the camera will shoot a ray through each pixel and intersect with the scene objects. Based on the material at the intersection point, each ray will change color and be reflected towards certain direction and continue tracing. As a ray reaches it trace depth, its color will be accumulated to compute the final color.
 
 ### Ray Scattering
 * Lambert Diffuse
@@ -61,3 +61,17 @@ Antialiasing OFF | Antialiasing ON
 --- | ---
 <img src="img/aa3_depth8_2000spp.png" width="400"> | <img src="img/aa4_depth8_2000spp.png" width="400">
 _obersvation_ By jittering the camera ray within the ray's own pixel and performing large number of iterations, the final color of a pixel is computed by averaging all rays going through the pixel, producing antialiased image.
+
+### Performance
+* Trace Depth
+
+Depth | 1 | 2 | 3
+:---:|:---:|:---:|:---:
+Time | 38 ms | 70 ms | 93 ms
+Image | ![](img/depth1.png) | ![](img/depth2.png) | ![](img/depth3.png)
+__Depth__ | __4__ | __5__ | __6__
+Time | 110 ms | 120 ms | 140 ms
+Image | ![](img/depth4.png) | ![](img/depth5.png) | ![](img/depth6.png)
+__Depth__ | __7__ | __8__ | __9__
+Tim3 | 148 ms | 156 ms | 156 ms
+Image | ![](img/depth7.png) | ![](img/depth8.png) | ![](img/depth9.png)
