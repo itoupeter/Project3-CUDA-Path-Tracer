@@ -73,5 +73,6 @@ __Depth__ | __4__ | __5__ | __6__
 Time | 110 ms | 120 ms | 140 ms
 Image | ![](img/depth4.png) | ![](img/depth5.png) | ![](img/depth6.png)
 __Depth__ | __7__ | __8__ | __9__
-Tim3 | 148 ms | 156 ms | 156 ms
+Tim3 | 148 ms | 156 ms | 160 ms
 Image | ![](img/depth7.png) | ![](img/depth8.png) | ![](img/depth9.png)
+_observation_
