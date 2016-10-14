@@ -17,7 +17,7 @@ CUDA Path Tracer
 * [ ] Performance Analysis
 
 ### Overview
-<img src="img/cover_depth8_5000spp.png" width="400">
+<img src="img/cover_depth8_5000spp.png"><br>
 The image is rendered by a path tracer on GPU. Features include diffuse, glossy, specular reflection, refraction, depth of field, and stratified antialiasing.
 
 ### Ray Scattering
